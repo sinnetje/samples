@@ -16,7 +16,7 @@ This repository contains code samples from various projects I've worked on, and 
 [ Planningssysteem ]
 ----------------------------
 * Sample of a PHP project.
-* Used for displaying an input form for adding holidays to the system.
+* Used for displaying an input form for adding holidays that have to be taken into account when planning.
 * Custom holidays (i.e. depending on religion) or standard holidays (e.g. Christmas) can be added.
 * Written in a custom framework (hence the .egg file).
 
