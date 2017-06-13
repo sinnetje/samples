@@ -1,0 +1,184 @@
+/*------------------------------------*\
+                $TEXT
+\*------------------------------------*/
+@mixin inset-text($opacity:0.5) 
+    {
+        text-decoration: none;
+        text-shadow: rgba(0, 0, 0, $opacity) -1px -1px 0px;
+    }
+@mixin inset-dark-text($opacity:0.5) 
+    {
+        text-decoration: none;
+        text-shadow: rgba(255, 255, 255, $opacity) 1px 1px 0px;
+    }
+@mixin outset-text($opacity:0.5) 
+    {
+        text-decoration: none;
+        text-shadow: rgba(0, 0, 0, $opacity) 1px 1px 0px;
+    }
+/*------------------------------------*\
+                $CORNERS 
+\*------------------------------------*/
+@mixin rounded-corners($radius:5px) 
+    {
+        border-radius: $radius;
+        -khtml-border-radius: $radius; 
+        -moz-border-radius: $radius;
+        -ms-border-radius: $radius;
+        -o-border-radius: $radius;
+        -webkit-border-radius: $radius;
+    }
+@mixin border-radius($topLeft:0, $topRight:0, $bottomRight:0, $bottomLeft:0) 
+    {
+        -moz-border-radius:$topLeft $topRight $bottomRight $bottomLeft; 
+        -webkit-border-radius:$topLeft $topRight $bottomRight $bottomLeft; 
+        border-radius:$topLeft $topRight $bottomRight $bottomLeft; 
+        -khtml-border-radius:$topLeft $topRight $bottomRight $bottomLeft; 
+    }
+/*------------------------------------*\
+                $BOX EFFECTS
+\*------------------------------------*/
+@mixin highlight($x-axis: 0, $y-axis: 1px, $blur: 2px, $alpha: 0.1) 
+    {
+        -webkit-box-shadow: inset $x-axis $y-axis $blur rgba(255,255,255, $alpha);
+        -moz-box-shadow: inset $x-axis $y-axis $blur rgba(255,255,255, $alpha);
+        box-shadow: inset $x-axis $y-axis $blur rgba(255,255,255, $alpha);
+    }
+@mixin drop-shadow($x-axis: 0, $y-axis: 1px, $blur: 2px, $alpha: 0.1) 
+    {
+        -webkit-box-shadow: $x-axis $y-axis $blur rgba(0, 0, 0, $alpha);
+        -moz-box-shadow: $x-axis $y-axis $blur rgba(0, 0, 0, $alpha);
+        box-shadow: $x-axis $y-axis $blur rgba(0, 0, 0, $alpha);
+    }
+@mixin inset-shadow($x-axis: 0, $y-axis: 1px, $blur: 2px, $alpha: 0.1) 
+    {
+        -webkit-box-shadow: inset $x-axis $y-axis $blur rgba(0, 0, 0, $alpha);
+        -moz-box-shadow: inset $x-axis $y-axis $blur rgba(0, 0, 0, $alpha);
+        box-shadow: inset $x-axis $y-axis $blur rgba(0, 0, 0, $alpha);
+    }
+@mixin highlight-effect($opacityTop:0.5, $opacityBottom:0.5) 
+    {
+        -moz-box-shadow:inset 0px 1px 0px rgba(255,255,255,$opacityTop), 0px 1px 0px rgba(255,255,255,$opacityBottom);
+        -webkit-box-shadow:inset 0px 1px 0px rgba(255,255,255,$opacityTop), 0px 1px 0px rgba(255,255,255,$opacityBottom);
+        box-shadow:inset 0px 1px 0px rgba(255,255,255,$opacityTop), 0px 1px 0px rgba(255,255,255,$opacityBottom);
+    }
+@mixin highlight-shade-effect($opacityTop:0.5, $opacityBottom:0.5) 
+    {
+        -moz-box-shadow:inset 0px 1px 0px rgba(255,255,255,$opacityTop), 0px 1px 0px rgba(0,0,0,$opacityBottom);
+        -webkit-box-shadow:inset 0px 1px 0px rgba(255,255,255,$opacityTop), 0px 1px 0px rgba(0,0,0,$opacityBottom);
+        box-shadow:inset 0px 1px 0px rgba(255,255,255,$opacityTop), 0px 1px 0px rgba(0,0,0,$opacityBottom);
+    }
+@mixin pressed-effect($opacityTop:0.5, $opacityBottom:0.5) 
+    {
+        -moz-box-shadow:inset 0px 1px 0px rgba(0,0,0,$opacityTop), 0px 1px 0px rgba(255,255,255,$opacityBottom);
+        -webkit-box-shadow:inset 0px 1px 0px rgba(0,0,0,$opacityTop), 0px 1px 0px rgba(255,255,255,$opacityBottom);
+        box-shadow:inset 0px 1px 0px rgba(0,0,0,$opacityTop), 0px 1px 0px rgba(255,255,255,$opacityBottom);
+    }
+/*------------------------------------*\
+                $GRADIENTS
+\*------------------------------------*/
+@mixin gradient($color, $darkColor) 
+    {
+        background: $color; /* Old browsers */
+        background-image: -moz-linear-gradient(top,  $color 0%, $darkColor 100%); /* FF3.6+ */
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$color), color-stop(100%,$darkColor)); /* Chrome,Safari4+ */
+        background-image: -webkit-linear-gradient(top,  $color 0%,$darkColor 100%); /* Chrome10+,Safari5.1+ */
+        background-image: -o-linear-gradient(top,  $color 0%,$darkColor 100%); /* Opera 11.10+ */
+        background-image: -ms-linear-gradient(top,  $color 0%,$darkColor 100%); /* IE10+ */
+        background-image: linear-gradient(to bottom,  $color 0%,$darkColor 100%); /* W3C */
+    }
+@mixin glossy-gradient($color) 
+    {
+        $color1:lighten($color, 20%); 
+        $color2:lighten($color, 3%); /* color top half */
+        $color3:darken($color, 0%); /* color bottom half */
+        
+        background: $color2; /* Old browsers */
+        background-image: -moz-linear-gradient(top, $color1 0%, $color1 1%, $color2 2%, $color2 49%, $color3 50%, $color3 100%); /* FF3.6+ */
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$color1), color-stop(1%,$color1), color-stop(2%,$color2)), color-stop(49%,$color2), color-stop(50%,$color2), color-stop(100%,$color3); /* Chrome,Safari4+ */
+        background-image: -webkit-linear-gradient(top, $color1 0%, $color1 1%, $color2 2%, $color2 49%, $color3 50%, $color3 100%); /* Chrome10+,Safari5.1+ */
+        background-image: -o-linear-gradient(top, $color1 0%, $color1 1%, $color2 2%, $color2 49%, $color3 50%, $color3 100%); /* Opera 11.10+ */
+        background-image: -ms-linear-gradient(top, $color1 0%, $color1 1%, $color2 2%, $color2 49%, $color3 50%, $color3 100%); /* IE10+ */
+        background-image: linear-gradient(to bottom, $color1 0%, $color1 1%, $color2 2%, $color2 49%, $color3 50%, $color3 100%); /* W3C */
+    }
+@mixin inverse-glossy-gradient($color) 
+    {
+        $color1:darken($color, 20%); 
+        $color2:darken($color, 3%); /* color top half */
+        $color3:lighten($color, 0%); /* color bottom half */
+        
+        background: $color2; /* Old browsers */
+        background-image: -moz-linear-gradient(top, $color1 0%, $color1 1%, $color2 2%, $color2 49%, $color3 50%, $color3 100%); /* FF3.6+ */
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$color1), color-stop(1%,$color1), color-stop(2%,$color2)), color-stop(49%,$color2), color-stop(50%,$color2), color-stop(100%,$color3); /* Chrome,Safari4+ */
+        background-image: -webkit-linear-gradient(top, $color1 0%, $color1 1%, $color2 2%, $color2 49%, $color3 50%, $color3 100%); /* Chrome10+,Safari5.1+ */
+        background-image: -o-linear-gradient(top, $color1 0%, $color1 1%, $color2 2%, $color2 49%, $color3 50%, $color3 100%); /* Opera 11.10+ */
+        background-image: -ms-linear-gradient(top, $color1 0%, $color1 1%, $color2 2%, $color2 49%, $color3 50%, $color3 100%); /* IE10+ */
+        background-image: linear-gradient(to bottom, $color1 0%, $color1 1%, $color2 2%, $color2 49%, $color3 50%, $color3 100%); /* W3C */
+
+
+
+    }
+@mixin diagonal-lines($color1,$color2,$width:30) 
+    {
+        background-image: -webkit-gradient(linear, left bottom, right top, color-stop(0, $color1), color-stop(0.25, $color1), color-stop(0.25, $color2), color-stop(0.5, $color2), color-stop(0.5, $color1), color-stop(0.75, $color1), color-stop(0.75, $color2));
+        background-image: -webkit-linear-gradient(left bottom, $color1 0%, $color1 25%, $color2 25%, $color2 50%, $color1 50%, $color1 75%, $color2 75%);
+        background-image: -moz-linear-gradient(left bottom, $color1 0%, $color1 25%, $color2 25%, $color2 50%, $color1 50%, $color1 75%, $color2 75%);
+        background-image: -ms-linear-gradient(left bottom, $color1 0%, $color1 25%, $color2 25%, $color2 50%, $color1 50%, $color1 75%, $color2 75%);
+        background-image: -o-linear-gradient(left bottom, $color1 0%, $color1 25%, $color2 25%, $color2 50%, $color1 50%, $color1 75%, $color2 75%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$color1', endColorstr='$color2',GradientType=0 ); /* IE6-8 */
+        background-image: linear-gradient(left bottom, $color1 0%, $color1 25%, $color2 25%, $color2 50%, $color1 50%, $color1 75%, $color2 75%);
+        background-size: $width+px $width+px;
+    }
+@mixin transparent-glossy-gradient($opacityTop:0.2, $opacityBottom:0) 
+    {
+        $color1:rgba(255,255,255,$opacityTop);
+        $color2:rgba(0,0,0,$opacityBottom);
+        
+        background: $color1; /* Old browsers */
+        background-image: -moz-linear-gradient(top, $color1 0%, $color1 49%, $color2 50%, $color2 100%); /* FF3.6+ */
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$color1), color-stop(100%,$color2)); /* Chrome,Safari4+ */
+        background-image: -webkit-linear-gradient(top, $color1 0%, $color1 49%, $color2 50%, $color2 100%); /* Chrome10+,Safari5.1+ */
+        background-image: -o-linear-gradient(top, $color1 0%, $color1 49%, $color2 50%, $color2 100%); /* Opera 11.10+ */
+        background-image: -ms-linear-gradient(top, $color1 0%, $color1 49%, $color2 50%, $color2 100%); /* IE10+ */
+        background-image: linear-gradient(to bottom, $color1 0%, $color1 49%, $color2 50%, $color2 100%); /* W3C */
+    }
+@mixin opacity($percent) 
+    {
+        -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=$percent)";
+        filter: alpha(opacity=$percent);
+        -moz-opacity:$percent/100;
+        -khtml-opacity: $percent/100;
+        opacity: $percent/100;
+    }
+
+@mixin user-select() 
+    {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+@mixin box-sizing()
+    {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+    }
+
+/*------------------------------------*\
+                $OTHER
+\*------------------------------------*/
+@function width-for-cols($numberOfColumns) 
+    {
+        @return ($numberOfColumns * $columnWidth) ;
+    }
+
+@function fluid-width-for-cols($numberOfColumns) 
+    {
+        @return ($numberOfColumns * $columnFluidWidth) ;
+    }
+
+

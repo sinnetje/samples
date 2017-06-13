@@ -1,0 +1,13 @@
+# holiday       day     month   easterDeviation
+newYearsDay     |1      |1      |NULL
+kingsDay        |27     |4      |NULL
+liberation      |5      |5      |NULL
+newYearsEve     |31     |12     |NULL
+christmasDay    |25     |12     |NULL
+boxingDay       |26     |12     |NULL
+goodFriday      |NULL   |NULL   |-2
+easter          |NULL   |NULL   |0
+easterMonday    |NULL   |NULL   |1
+ascension       |NULL   |NULL   |39
+pentecost       |NULL   |NULL   |49
+pentecostMonday |NULL   |NULL   |50

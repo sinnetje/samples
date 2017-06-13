@@ -1,0 +1,130 @@
+<!-- Week View -->
+<template name="WeekView">
+    <div class="row">
+        <div class="col-xs-5">
+            <h2>{{monthName}} - week {{weekNumber}}</h2>
+        </div>
+        <div class="col-xs-7" style="padding-top:1.2em;">
+            {{> AgendaButtons}}
+            <div class="btn-group pull-right" role="group" aria-label="agenda-week-navigation">
+                <a href="/agenda/week/{{prevWeek}}" class="btn btn-default calendar-button"><i class="fa fa-chevron-left"></i></a>
+                <a href="/agenda/week/{{nextWeek}}" class="btn btn-default calendar-button"><i class="fa fa-chevron-right"></i></a>
+            </div>
+
+            <a href="/agenda/week/{{currWeek}}" class="btn btn-default pull-right calendar-button" style="margin-right:1em;"><i class="fa fa-calendar"></i></a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="calendar-container">
+            <!-- Display top header with dates-->
+            <div class="week-view-hours-header"></div>
+            {{#each daysOfWeek}}
+                <div class="week-view-header {{#if isToday}}highlight-week{{/if}}">{{dateNumber}}</div>
+            {{/each}}
+
+            <div class="week-view-hours-header"></div>
+            {{#each daysOfWeek}}
+                <div class="week-view-header-holidays {{#if isToday}}highlight-week{{/if}}">
+                {{#each holidays}}
+                    {{> WeekViewHoliday}}
+                {{/each}}
+                </div>
+            {{/each}}
+
+            <!-- Display side header with times -->
+            <div class="week-view-hours-header">
+                {{#each hoursOfDay}}
+                    <div class="time-of-day">{{timeOfDay}}</div>
+                    <div class="time-of-day-half"></div>
+                {{/each}}
+            </div>
+    
+            <!-- Print structure and appointments -->
+            {{#each daysOfWeek}}
+                <div class="week-view-week-column {{#if isToday}}highlight-week{{/if}}">
+                    {{#if isToday}}
+                        <div class="time-cursor" style="top:{{currentTimePosition}}px"></div>
+                    {{/if}}
+                    {{#each appointments}}
+                        {{> WeekViewAppointment}}
+                    {{/each}}
+                    {{#each hoursOfDay}}
+                        <div class="time-of-day"></div>
+                        <div class="time-of-day-half"></div>
+                    {{/each}}
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</template>
+
+<template name="WeekViewHoliday">
+    <div class="week-view-holiday" style="top:0px;height:21px;">
+        {{name}}
+    </div>
+</template>
+
+
+
+<template name="WeekViewAppointment">
+    <div class="appointment-parent">
+        {{!-- Appointment data --}}
+        <div class="week-view-appointment no-copy {{appointmentStyle}} {{oldAppointmentStyle}} {{cancelledAppointmentStyle}} {{pendingAppointmentStyle}}" style="top:{{appointmentPosition}}px;height:{{appointmentHeight}}px;">
+            <span class="appointment-agenda-time">
+                {{#if isPending}}<i class="fa fa-question-circle"></i>{{/if}} 
+                {{startTime}} - {{endTime}}
+            </span>
+            <span class="appointment-agenda-name">{{firstName}} {{lastName}} - </span>
+            <span class="appointment-agenda-type">{{appointmentTypeName}}</span>
+        </div>
+        
+        {{!-- Popup --}}
+        <div class="week-view-appointment-detail" style="top:{{appointmentDetailPosition}}px;">
+            <div class="pull-right">
+                <i title="Sluit popup" class="fa fa-times close-appointment-button"></i>
+            </div>
+
+            {{#if editMode}}
+                {{!-- Edit appointment form --}}
+                <form action="" class="edit-appointment-form-popup">
+                    <label for="date">Datum</label> <input type="text" id="date" value="{{date}}" />
+                    <label for="time">Tijdstip</label> <input type="text" id="time" value="{{startTime}}" />
+                    <button class="btn btn-primary" type="submit">Opslaan</button>
+                    <button class="btn btn-default cancel" type="button">Annuleren</button>
+                </form>
+            {{else}}
+                {{!-- Detailed appointment data --}}
+                <span class="appointment-agenda-time">{{startTime}} - {{endTime}}</span>
+                <span class="appointment-agenda-name">{{firstName}} {{lastName}}</span>
+                <span class="appointment-agenda-type">{{appointmentTypeName}}</span>
+                <span class="appointment-agenda-type">{{remarks}}</span>
+                <span class="appointment-agenda-type">({{status}})</span>
+            {{/if}}
+            
+            {{!-- Button menu --}}
+            {{#unless editMode}}
+            <div class="appointment-button-menu">
+                {{#if isPending}}
+                    <button 
+                        type="button" 
+                        class="btn {{#if hasEnoughCredits}}btn-success approve{{/if}}" 
+                        title="{{#if hasEnoughCredits}}Toevoegen aan agenda{{/if}}{{#unless hasEnoughCredits}}U heeft niet genoeg credits.{{/unless}}">
+                        <i class="fa fa-fw fa-calendar"></i>
+                    </button>
+                {{/if}}
+                <button class="btn btn-primary edit" title="Afspraakmoment wijzigen"><i class="fa fa-pencil"></i></button>
+                {{#unless isPending}}
+                    <button 
+                        type="button" 
+                        class="btn btn-danger decline" 
+                        title="{{#if isNotApproved}}Afspraak afwijzen{{/if}}{{#unless isNotApproved}}Afspraak annuleren{{/unless}}">
+                        <i class="fa fa-fw fa-trash"></i>
+                    </button>
+                {{/unless}}
+            </div>
+            {{/unless}}
+            
+        </div>
+    </div>
+</template>
