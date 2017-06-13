@@ -63,7 +63,6 @@ Template.WeekViewAppointment.events({
 });
 
 
-var e =0;
 // HELPERS
 Template.WeekView.helpers({
     monthName: function() {
